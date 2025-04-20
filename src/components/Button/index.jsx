@@ -1,12 +1,12 @@
 import { ButtonPrimary, ButtonSecond } from "./styles";
 
-function Button({ children, red }) {
+function Button({ children, red, ...rest }) {
   return (
     <>
       {red ? (
-        <ButtonPrimary>{children}</ButtonPrimary>
+        <ButtonPrimary {...rest}>{children}</ButtonPrimary>
       ) : (
-        <ButtonSecond>{children}</ButtonSecond>
+        <ButtonSecond {...rest}>{children}</ButtonSecond>
       )}
     </>
   );

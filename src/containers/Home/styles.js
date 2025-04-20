@@ -49,7 +49,7 @@ export const Info = styled.div`
 `
 
 export const Poster = styled.div`
-    z-index: 99;
+    z-index: 90;
 
     img {
         width: 300px;

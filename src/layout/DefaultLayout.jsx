@@ -6,7 +6,6 @@ function DefaultLayout() {
         <>
             <Header />
             <Outlet />
-            <div>Footer</div>
         </>
     )
 }

@@ -1,28 +1,24 @@
 import { useEffect, useState } from "react";
 import { Container, Background, CloseButton } from "./styles";
-import api from "../../services/api";
+import { getMovieDetails } from "../../services/getData";
 
 function Modal({ movieId, setShowModal }) {
   const [movieDetails, setMovieDetails] = useState();
 
   useEffect(() => {
-    async function getMovieDetails() {
-      try {
-        const {
-          data: { results },
-        } = await api.get(`/movie/${movieId}/videos`);
+    async function fetchMovieDetails() {
+      const details = await getMovieDetails(movieId);
 
-        console.log(results[0]);
-        setMovieDetails(results[0]);
-      } catch (error) {
-        console.error("Erro ao buscar vídeos:", error);
-      }
+      setMovieDetails(details);
     }
 
-    if (movieId) {
-      getMovieDetails();
-    }
+    fetchMovieDetails();
   }, [movieId]);
+
+  useEffect(() => {
+  }, [movieDetails])
+  
+
 
   return (
     <Background>
@@ -30,7 +26,7 @@ function Modal({ movieId, setShowModal }) {
         <CloseButton onClick={() => setShowModal(false)}>❌</CloseButton>
         {movieDetails && (
           <iframe
-            src={`https://www.youtube.com/embed/${movieDetails.key}`}
+            src={`https://www.youtube.com/embed/${movieDetails[0].key}`}
             title="YouTube video player"
             height="500px"
             width="100%"
